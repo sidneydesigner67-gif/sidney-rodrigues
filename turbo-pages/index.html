@@ -3,163 +3,224 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Turbo Pages — O Guia Definitivo para Páginas Rápidas e Lucrativas</title>
-  <meta name="theme-color" content="#ffffff">
+  <title>Turbo Pages — O Seu Guia Definitivo para Páginas Rápidas e Lucrativas</title>
+  <meta name="theme-color" content="#f4faff">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700&family=Roboto:wght@400&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" type="image/webp"
-        imagesrcset="assets/portrait-480.webp 480w, assets/portrait-800.webp 800w, assets/portrait-1086.webp 1086w"
-        imagesizes="(max-width: 1023px) 300px, 31vw">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --blue: #66baff;
       --blue-dark: #006ec9;
+      --bg: #f4faff;
       --ink: #000000;
       --ink-logo: #2e2e2e;
       --muted: #686868;
       --white: #ffffff;
       --font-display: "Archivo", system-ui, sans-serif;
       --font-body: "Roboto", system-ui, sans-serif;
+      --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
     }
 
     *, *::before, *::after { box-sizing: border-box; }
     html { -webkit-text-size-adjust: 100%; }
-    body { margin: 0; background: var(--white); color: var(--ink); font-family: var(--font-body); }
-    img { display: block; }
+    body { margin: 0; min-height: 100svh; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: var(--font-body); }
+    main { flex: 1 0 auto; }
+    ::selection { background: rgba(0, 110, 201, .18); color: var(--ink); }
+    img, video { display: block; }
     h1, p, ul { margin: 0; }
     ul { padding: 0; list-style: none; }
 
     /* ---------- Shared ---------- */
+    .page { display: flex; flex-direction: column; overflow: hidden; }
+    .media { position: relative; overflow: hidden; }
+    .media video { position: absolute; left: 0; object-fit: cover; object-position: left top; }
+    .media::after { content: ""; position: absolute; left: 0; right: 0; pointer-events: none; }
+    .content { position: relative; z-index: 1; }
+    .footer { border-top: 1px solid rgba(0, 110, 201, .16); font-family: var(--font-body); font-weight: 300; color: var(--muted); }
     .brand { display: flex; width: fit-content; align-items: center; color: var(--ink-logo); font-family: var(--font-display); font-weight: 500; text-decoration: none; white-space: nowrap; }
     .brand img { height: auto; }
-    .hero__title { font-family: var(--font-display); font-weight: 500; color: var(--ink); }
-    .benefits { font-family: var(--font-body); color: var(--muted); }
-    .benefits li { display: flex; }
+    .title { font-family: var(--font-display); font-weight: 500; color: var(--ink); }
+    .benefits li { display: flex; align-items: center; }
     .benefits img { flex: none; }
+    .offer { display: flex; align-items: center; }
     .cta {
+      position: relative; isolation: isolate; overflow: hidden;
       display: flex; align-items: center; justify-content: center; text-align: center;
-      background: var(--blue-dark); color: var(--white);
-      font-family: var(--font-display); font-weight: 700; text-transform: uppercase; text-decoration: none;
-      transition: background-color .2s ease, transform .2s ease;
+      background: #003f78; color: var(--white); border-radius: 9999px;
+      font-family: var(--font-body); font-weight: 700; text-transform: uppercase; text-decoration: none; white-space: nowrap;
+      transition: background-color 200ms ease, transform 160ms var(--ease-out);
       -webkit-tap-highlight-color: transparent;
     }
-    .cta:hover { background: #005ca8; }
-    .cta:active { transform: scale(.98); }
-    .cta:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
-    .photo { position: relative; overflow: hidden; box-shadow: 110px 50px 150px rgba(0, 53, 96, .18); }
-    .photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
-    .photo::after { content: ""; position: absolute; inset: 0; background: rgba(102, 186, 255, .11); mix-blend-mode: color; pointer-events: none; }
-    .only-mobile { display: none; }
+    .cta:active { transform: scale(.97); }
 
-    /* ---------- Desktop (Frame 1 · 2560×1188) ---------- */
-    @media (min-width: 1024px) {
-      .hero {
-        --u: calc(min(100vw, 2560px) / 2560);
-        position: relative; overflow: hidden;
-        min-height: calc(1188 * var(--u));
-      }
-      .hero__band { position: absolute; top: 0; bottom: 0; left: calc(1521 * var(--u)); right: 0; background: var(--blue); }
-      .hero__chevrons { position: absolute; top: 0; left: calc(1019.76 * var(--u)); width: calc(1987.2 * var(--u)); height: calc(1188 * var(--u)); }
-      .hero__chevrons img {
-        position: absolute; left: 50%; top: 50%;
-        width: calc(1188 * var(--u)); height: calc(1987.2 * var(--u));
-        transform: translate(-50%, -50%) rotate(-90deg);
-      }
-      .hero__content {
-        position: relative; z-index: 1;
-        padding: calc(107.8 * var(--u)) 0 calc(230 * var(--u)) calc(310 * var(--u));
-        max-width: calc(1150 * var(--u));
-      }
-      .brand { margin-left: calc(9 * var(--u)); gap: calc(20 * var(--u)); font-size: max(18px, calc(34.67 * var(--u))); line-height: 1.0625; }
-      .brand img { width: calc(65.96 * var(--u)); }
-      .hero__title { margin-top: calc(114 * var(--u)); width: max(340px, calc(736 * var(--u))); font-size: max(32px, calc(70.625 * var(--u))); line-height: 1.3125; }
-      .benefits { margin-top: calc(17 * var(--u)); font-size: max(15px, calc(24.369 * var(--u))); line-height: 1.7235; }
-      .benefits li { align-items: flex-start; gap: .37em; }
-      .benefits img { width: .944em; height: .696em; margin-top: .514em; }
-      .cta { margin-top: calc(68 * var(--u)); width: max(280px, calc(468 * var(--u))); min-height: max(60px, calc(94 * var(--u))); padding: 8px max(20px, calc(45 * var(--u))); font-size: max(15px, calc(26.292 * var(--u))); line-height: 1.122; }
-      .photo {
-        position: absolute; z-index: 1;
-        left: calc(1253 * var(--u)); top: 50%; transform: translateY(calc(-50% - 6.5 * var(--u)));
-        width: calc(773 * var(--u)); height: calc(887.88 * var(--u));
-        border-radius: calc(32.208 * var(--u));
-      }
-      .photo::after { border-radius: inherit; }
-      .hero__visual-mobile { display: contents; }
-      .hero__visual-mobile .band, .hero__visual-mobile .chevrons, .hero__footer { display: none; }
+    /* Luz que circula pela borda: um cone girando atrás do preenchimento, visível só no anel de 2px. */
+    .cta::before {
+      content: ""; position: absolute; z-index: -2; left: 50%; top: 50%;
+      width: 120%; aspect-ratio: 1;
+      background: conic-gradient(from 0deg, transparent 0deg 260deg, rgba(102, 186, 255, .75) 320deg, #ffffff 348deg, #ffffff 354deg, transparent 360deg);
+      transform: translate(-50%, -50%) rotate(0deg);
+      animation: cta-orbit 4s linear infinite;
+    }
+    /* Degradê que flui devagar no preenchimento. Tons escuros o bastante para o branco manter 4.5:1. */
+    .cta__fill { position: absolute; z-index: -1; inset: 2px; border-radius: inherit; overflow: hidden; background: var(--blue-dark); transition: filter 200ms ease; }
+    .cta__fill::before {
+      content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 200%;
+      background: linear-gradient(90deg, #004a8c 0%, #006ec9 12.5%, #0a76cf 25%, #006ec9 37.5%, #004a8c 50%, #006ec9 62.5%, #0a76cf 75%, #006ec9 87.5%, #004a8c 100%);
+      animation: cta-flow 8s linear infinite;
+    }
+    @keyframes cta-orbit { to { transform: translate(-50%, -50%) rotate(360deg); } }
+    @keyframes cta-flow { to { transform: translateX(-50%); } }
+    @media (hover: hover) and (pointer: fine) {
+      .cta:hover .cta__fill { filter: brightness(1.1); }
+    }
+    .cta:focus-visible, .brand:focus-visible { outline: 3px solid #66baff; outline-offset: 3px; }
+    .brand:focus-visible { border-radius: 4px; }
+    .price { font-family: var(--font-body); font-weight: 300; color: var(--muted); }
+
+    /* ---------- Entrada (uma vez, na carga) ---------- */
+    @keyframes rise-in {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .brand, .title, .benefits li, .offer {
+      animation: rise-in 640ms var(--ease-out) both;
+      animation-delay: calc(var(--i, 0) * 70ms + 120ms);
+    }
+    .brand { --i: 0; }
+    .title { --i: 1; }
+    .benefits li:nth-child(1) { --i: 2; }
+    .benefits li:nth-child(2) { --i: 3; }
+    .benefits li:nth-child(3) { --i: 4; }
+    .benefits li:nth-child(4) { --i: 5; }
+    .offer { --i: 6; }
+    @media (prefers-reduced-motion: reduce) {
+      .brand, .title, .benefits li, .offer { animation: fade-in 200ms ease both; animation-delay: 0ms; }
+      .cta::before { animation: none; opacity: .5; }
+      .cta__fill::before { animation: none; }
     }
 
-    /* ---------- Mobile (Frame 3 · 408×957) ---------- */
-    @media (max-width: 1023px) {
-      .only-desktop { display: none; }
-      .only-mobile { display: block; }
-      .hero { position: relative; overflow: hidden; min-height: 100svh; display: flex; flex-direction: column; }
-      .hero__band, .hero__chevrons { display: none; }
-      .hero__content { padding: 71px 16px 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
-      .brand { gap: 14px; font-size: 24.457px; line-height: 1.0625; }
-      .brand img { width: 33.53px; }
-      .hero__title { margin-top: 27px; font-size: clamp(28px, 8.47vw, 40px); line-height: 1.3125; }
-      .benefits { font-size: 15px; line-height: 1.4; }
-      .benefits li { justify-content: center; align-items: baseline; gap: 2px; }
-      .benefits img { width: 12px; height: 8.85px; }
-      .cta { margin-top: 44px; width: 256px; min-height: 52px; padding: 9px 22px; font-size: 15px; line-height: 1.12; }
+    /* ---------- Desktop (Frame 8 · 1920×1120) ---------- */
+    @media (min-width: 1024px) {
+      :root { --u: calc(min(100vw, 1920px) / 1920); }
+      .only-mobile { display: none; }
+      .media { height: calc(649 * var(--u)); }
+      .media video, .media::after { top: calc(-74 * var(--u)); height: calc(723 * var(--u)); }
+      .media video { width: 100%; }
+      .media::after { background: linear-gradient(to bottom, rgba(244, 250, 255, 0) 28.08%, var(--bg) 100%); }
+      .content {
+        display: flex; width: 100%; max-width: 1920px; margin: calc(-58 * var(--u)) auto 0;
+        padding: 0 0 calc(135 * var(--u)) calc(257 * var(--u));
+      }
+      .content__lead { width: calc(767 * var(--u)); padding-top: calc(32 * var(--u)); }
+      .brand { gap: calc(15 * var(--u)); font-size: calc(25.797 * var(--u)); line-height: calc(27.41 * var(--u)); }
+      .brand img { width: calc(38.9615 * var(--u)); }
+      .title { margin-top: calc(8 * var(--u)); width: calc(679 * var(--u)); font-size: calc(49.752 * var(--u)); line-height: calc(65.299 * var(--u)); }
+      /* Pisos com max(): em 1920 valem os valores do Frame 8; abaixo disso o texto não fica ilegível. */
+      .benefits { font-weight: 300; font-size: max(16px, calc(24.369 * var(--u))); line-height: max(28px, calc(42 * var(--u))); color: var(--ink); }
+      .benefits li { gap: max(6px, calc(9 * var(--u))); }
+      .benefits img { width: max(15px, calc(23 * var(--u))); height: auto; }
+      .offer { margin-top: calc(34 * var(--u)); gap: max(10px, calc(14 * var(--u))); }
+      .cta { width: max(260px, calc(423 * var(--u))); height: max(48px, calc(71.977 * var(--u))); font-size: max(14px, calc(21.024 * var(--u))); line-height: calc(23.589 * var(--u)); }
+      .price { font-size: max(16px, calc(24.369 * var(--u))); line-height: max(28px, calc(42 * var(--u))); }
+      .footer__inner {
+        display: flex; justify-content: space-between; align-items: center; max-width: 1920px; margin: 0 auto;
+        padding: calc(47 * var(--u)) calc(218 * var(--u)) calc(48 * var(--u)) calc(257 * var(--u));
+        line-height: max(20px, calc(24 * var(--u)));
+      }
+      .footer__credit { font-size: max(14px, calc(18 * var(--u))); }
+      .footer__copy { font-size: max(13px, calc(16 * var(--u))); }
+    }
 
-      .hero__visual-mobile { position: relative; flex: 1; margin-top: 40px; padding-top: 21px; display: flex; flex-direction: column; align-items: center; }
-      .hero__visual-mobile .band { position: absolute; left: 0; right: 0; top: 95px; bottom: 0; background: var(--blue); }
-      .hero__visual-mobile .chevrons { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: min(372.84px, 91.4vw); height: auto; }
-      .photo { width: min(300px, 76vw); aspect-ratio: 773 / 887.88; border-radius: 16px; box-shadow: 30px 14px 42px rgba(0, 53, 96, .18); }
-      .hero__footer { position: relative; display: flex; align-items: center; gap: 8px; margin-top: auto; padding: 28px 16px calc(28px + env(safe-area-inset-bottom)); color: var(--muted); font-size: 14px; line-height: 1.23; text-align: left; }
-      .hero__footer img { width: 41px; height: 41px; border-radius: 50%; object-fit: cover; }
+    /* ---------- Mobile (Frame 3 · 408×802) ---------- */
+    @media (max-width: 1023px) {
+      :root { --m: calc(min(100vw, 510px) / 408); }
+      .only-desktop { display: none; }
+      .content { display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: calc(-27 * var(--m)); padding: 0 calc(24 * var(--m)); }
+      .content__lead, .content__body { display: flex; flex-direction: column; align-items: center; }
+      .brand { gap: calc(8.2 * var(--m)); font-size: calc(14.216 * var(--m)); line-height: calc(15.104 * var(--m)); }
+      .brand img { width: calc(19.4868 * var(--m)); }
+      .title { margin-top: calc(24.5 * var(--m)); max-width: calc(360 * var(--m)); font-size: calc(34.545 * var(--m)); line-height: calc(45.34 * var(--m)); }
+      .benefits { margin-top: calc(1.5 * var(--m)); font-weight: 400; font-size: calc(14.826 * var(--m)); line-height: calc(19.605 * var(--m)); color: var(--muted); }
+      .benefits li { justify-content: center; gap: calc(1 * var(--m)); }
+      .benefits img { width: calc(11.9138 * var(--m)); height: auto; }
+      .offer { flex-direction: column; margin-top: calc(34 * var(--m)); gap: calc(1 * var(--m)); }
+      .cta { width: calc(264 * var(--m)); height: calc(52 * var(--m)); font-size: calc(14.83 * var(--m)); line-height: calc(16.984 * var(--m)); }
+      .price { font-size: calc(14.83 * var(--m)); line-height: calc(30.24 * var(--m)); }
+      .media { height: calc(271 * var(--m)); }
+      .media video, .media::after { top: 0; height: 100%; }
+      .media video { width: calc(774 * var(--m)); object-position: left center; }
+      .media::after { background: linear-gradient(to bottom, rgba(244, 250, 255, 0) 47.42%, var(--bg) 100%); }
+      .footer { margin-top: calc(55 * var(--m)); }
+      .footer__inner {
+        display: flex; flex-direction: column; align-items: center; gap: calc(6 * var(--m)); text-align: center;
+        padding: calc(32 * var(--m)) calc(24 * var(--m)) calc(36 * var(--m));
+      }
+      .footer__credit { font-size: calc(14.83 * var(--m)); line-height: calc(20 * var(--m)); }
+      .footer__copy { font-size: max(12px, calc(12.5 * var(--m))); line-height: calc(18 * var(--m)); }
     }
   </style>
 </head>
 <body>
-  <main>
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero__band" aria-hidden="true"></div>
-      <div class="hero__chevrons" aria-hidden="true"><img src="assets/chevrons-desktop.svg" alt="" width="1188" height="1987.2"></div>
+  <main class="page">
+    <div class="media">
+      <video src="assets/1022.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+    </div>
 
-      <div class="hero__content">
+    <section class="content">
+      <div class="content__lead">
         <a class="brand" href="#" aria-label="Turbo Pages">
-          <img src="assets/logo.svg" alt="" width="65.9615" height="110.336">
+          <img class="only-desktop" src="assets/logo-desktop-v2.svg" alt="" width="38.9615" height="65.172">
+          <img class="only-mobile" src="assets/logo-mobile-v2.svg" alt="" width="19.4868" height="32.5962">
           <span>TURBO PAGES</span>
         </a>
-
-        <h1 class="hero__title" id="hero-title">O Guia Definitivo<br>para Páginas Rápidas<br>e Lucrativas</h1>
-
-        <ul class="benefits only-desktop">
-          <li><img src="assets/check.svg" alt="" width="23" height="16.9678">Maximize a sua taxa de conversão</li>
-          <li><img src="assets/check.svg" alt="" width="23" height="16.9678">Tenha mais performance na taxa de cliques nos anúncios.</li>
-          <li><img src="assets/check.svg" alt="" width="23" height="16.9678">Potencialize o retorno sobre o investimento (+ROI).</li>
-          <li><img src="assets/check.svg" alt="" width="23" height="16.9678">Reduza o custo por clique (CPC) e por lead  (CPL).</li>
-        </ul>
-        <ul class="benefits only-mobile">
-          <li><img src="assets/check.svg" alt="" width="23" height="16.9678">Mais conversão.</li>
-          <li><img src="assets/check.svg" alt="" width="23" height="16.9678">Mais performance na taxa de cliques nos anúncios.</li>
-          <li><img src="assets/check.svg" alt="" width="23" height="16.9678">Mais retorno sobre o investimento (+ROI).</li>
-          <li><img src="assets/check.svg" alt="" width="23" height="16.9678">Menos custo por clique (CPC) e por lead  (CPL).</li>
-        </ul>
-
-        <a class="cta" href="#">PRECISO DE UMA PÁGINA RÁPIDA E LUCRATIVA</a>
+        <h1 class="title">O Seu Guia Definitivo <br class="only-mobile">para Páginas Rápidas <br class="only-mobile">e Lucrativas.</h1>
       </div>
 
-      <div class="hero__visual-mobile">
-        <div class="band" aria-hidden="true"></div>
-        <img class="chevrons" src="assets/chevrons-mobile.svg" alt="" aria-hidden="true" width="372.84" height="623.66">
-        <figure class="photo" style="margin:0">
-          <picture>
-            <source type="image/webp"
-                    srcset="assets/portrait-480.webp 480w, assets/portrait-800.webp 800w, assets/portrait-1086.webp 1086w"
-                    sizes="(max-width: 1023px) 300px, 31vw">
-            <img src="assets/portrait-800.jpg" alt="Sidney Rodrigues" width="1086" height="1448" fetchpriority="high" decoding="async">
-          </picture>
-        </figure>
-        <p class="hero__footer">
-          <img src="assets/avatar.webp" alt="" width="41" height="41" loading="lazy">
-          <span>Desenvolvido por<br>Sidney Rodrigues</span>
-        </p>
+      <div class="content__body">
+        <ul class="benefits only-desktop">
+          <li><img src="assets/check-blue.svg" alt="" width="23" height="16.9678">Maximize a sua taxa de conversão</li>
+          <li><img src="assets/check-blue.svg" alt="" width="23" height="16.9678">Tenha mais performance na taxa de cliques nos anúncios.</li>
+          <li><img src="assets/check-blue.svg" alt="" width="23" height="16.9678">Potencialize o retorno sobre o investimento (+ROI).</li>
+          <li><img src="assets/check-blue.svg" alt="" width="23" height="16.9678">Reduza o custo por clique (CPC) e por lead&nbsp; (CPL).</li>
+        </ul>
+        <ul class="benefits only-mobile">
+          <li><img src="assets/check-sm.svg" alt="" width="11.9138" height="8.78917">Mais conversão.</li>
+          <li><img src="assets/check-sm.svg" alt="" width="11.9138" height="8.78917">Mais performance na taxa de cliques nos anúncios.</li>
+          <li><img src="assets/check-sm.svg" alt="" width="11.9138" height="8.78917">Mais retorno sobre o investimento (+ROI).</li>
+          <li><img src="assets/check-sm.svg" alt="" width="11.9138" height="8.78917">Menos custo por clique (CPC) e por lead&nbsp; (CPL).</li>
+        </ul>
+
+        <div class="offer">
+          <a class="cta" href="https://pay.hub.la/xgfLXCwQiy7C8IW51eW9"><span class="cta__fill" aria-hidden="true"></span>ACESSAR AGORA</a>
+          <p class="price"><span class="only-mobile">Pagamento único de </span>R$47</p>
+        </div>
       </div>
     </section>
   </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <p class="footer__credit">Desenvolvido por Sidney Rodrigues</p>
+      <p class="footer__copy">© 2026 Turbo Pages. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Velocidade do vídeo de fundo (1 = normal).
+    var VIDEO_RATE = 0.75;
+    document.querySelectorAll('.media video').forEach(function (v) {
+      v.defaultPlaybackRate = VIDEO_RATE;
+      v.playbackRate = VIDEO_RATE;
+    });
+
+    // Respeita quem prefere menos movimento: o vídeo fica parado no primeiro frame.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('video[autoplay]').forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); });
+    }
+  </script>
 </body>
 </html>
