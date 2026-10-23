@@ -43,36 +43,39 @@
     .benefits li { display: flex; align-items: center; }
     .benefits img { flex: none; }
     .offer { display: flex; align-items: center; }
+    /* Botão "mesh": base quase preta com quatro manchas radiais de azul e um reflexo no canto superior direito. */
     .cta {
-      position: relative; isolation: isolate; overflow: hidden;
       display: flex; align-items: center; justify-content: center; text-align: center;
-      background: #003f78; color: var(--white); border-radius: 9999px;
+      color: var(--white); border-radius: 14px;
+      background:
+        radial-gradient(34% 70% at 94% 0%, rgba(226, 241, 255, .75) 0%, rgba(226, 241, 255, 0) 100%),
+        radial-gradient(50% 110% at 104% 60%, #2f9bff 0%, rgba(47, 155, 255, 0) 100%),
+        radial-gradient(46% 100% at 78% 110%, var(--blue-dark) 0%, rgba(0, 110, 201, 0) 100%),
+        radial-gradient(60% 120% at 44% 120%, #003a7a 0%, rgba(0, 58, 122, 0) 100%);
+      background-color: #02060d;
+      box-shadow:
+        0 16px 32px -14px rgba(0, 74, 160, .6),
+        inset 0 1px 0 rgba(255, 255, 255, .22),
+        inset 0 0 0 1px rgba(255, 255, 255, .1);
+      text-shadow: 0 1px 8px rgba(0, 0, 0, .35);
       font-family: var(--font-body); font-weight: 700; text-transform: uppercase; text-decoration: none; white-space: nowrap;
-      transition: background-color 200ms ease, transform 160ms var(--ease-out);
+      transition: transform 250ms var(--ease-out), box-shadow 250ms ease, filter 250ms ease;
       -webkit-tap-highlight-color: transparent;
     }
-    .cta:active { transform: scale(.97); }
-
-    /* Luz que circula pela borda: um cone girando atrás do preenchimento, visível só no anel de 2px. */
-    .cta::before {
-      content: ""; position: absolute; z-index: -2; left: 50%; top: 50%;
-      width: 120%; aspect-ratio: 1;
-      background: conic-gradient(from 0deg, transparent 0deg 260deg, rgba(102, 186, 255, .75) 320deg, #ffffff 348deg, #ffffff 354deg, transparent 360deg);
-      transform: translate(-50%, -50%) rotate(0deg);
-      animation: cta-orbit 4s linear infinite;
-    }
-    /* Degradê que flui devagar no preenchimento. Tons escuros o bastante para o branco manter 4.5:1. */
-    .cta__fill { position: absolute; z-index: -1; inset: 2px; border-radius: inherit; overflow: hidden; background: var(--blue-dark); transition: filter 200ms ease; }
-    .cta__fill::before {
-      content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 200%;
-      background: linear-gradient(90deg, #004a8c 0%, #006ec9 12.5%, #0a76cf 25%, #006ec9 37.5%, #004a8c 50%, #006ec9 62.5%, #0a76cf 75%, #006ec9 87.5%, #004a8c 100%);
-      animation: cta-flow 8s linear infinite;
-    }
-    @keyframes cta-orbit { to { transform: translate(-50%, -50%) rotate(360deg); } }
-    @keyframes cta-flow { to { transform: translateX(-50%); } }
+    .cta__arrow { flex: none; width: 18px; height: 18px; transition: transform 300ms var(--ease-out); }
+    .cta:active { transform: translateY(1px); }
     @media (hover: hover) and (pointer: fine) {
-      .cta:hover .cta__fill { filter: brightness(1.1); }
+      .cta:hover {
+        transform: translateY(-2px);
+        filter: brightness(1.08) saturate(1.05);
+        box-shadow:
+          0 22px 40px -16px rgba(0, 82, 178, .7),
+          inset 0 1px 0 rgba(255, 255, 255, .22),
+          inset 0 0 0 1px rgba(255, 255, 255, .1);
+      }
+      .cta:hover .cta__arrow { transform: translateX(3px); }
     }
+
     .cta:focus-visible, .brand:focus-visible { outline: 3px solid #66baff; outline-offset: 3px; }
     .brand:focus-visible { border-radius: 4px; }
     .price { font-family: var(--font-body); font-weight: 300; color: var(--muted); }
@@ -99,8 +102,7 @@
     .offer { --i: 6; }
     @media (prefers-reduced-motion: reduce) {
       .brand, .title, .benefits li, .offer { animation: fade-in 200ms ease both; animation-delay: 0ms; }
-      .cta::before { animation: none; opacity: .5; }
-      .cta__fill::before { animation: none; }
+      .cta:hover, .cta:active, .cta:hover .cta__arrow { transform: none; }
     }
 
     /* ---------- Desktop (Frame 8 · 1920×1120) ---------- */
@@ -124,7 +126,8 @@
       .benefits li { gap: max(6px, calc(9 * var(--u))); }
       .benefits img { width: max(15px, calc(23 * var(--u))); height: auto; }
       .offer { margin-top: calc(34 * var(--u)); gap: max(10px, calc(14 * var(--u))); }
-      .cta { width: max(260px, calc(423 * var(--u))); height: max(48px, calc(71.977 * var(--u))); font-size: max(14px, calc(21.024 * var(--u))); line-height: calc(23.589 * var(--u)); }
+      .cta { width: max(260px, calc(423 * var(--u))); height: max(48px, calc(71.977 * var(--u))); gap: max(8px, calc(12 * var(--u))); border-radius: max(12px, calc(16 * var(--u))); font-size: max(14px, calc(21.024 * var(--u))); line-height: calc(23.589 * var(--u)); }
+      .cta__arrow { width: max(16px, calc(22 * var(--u))); height: max(16px, calc(22 * var(--u))); }
       .price { font-size: max(16px, calc(24.369 * var(--u))); line-height: max(28px, calc(42 * var(--u))); }
       .footer__inner {
         display: flex; justify-content: space-between; align-items: center; max-width: 1920px; margin: 0 auto;
@@ -148,7 +151,8 @@
       .benefits li { justify-content: center; gap: calc(1 * var(--m)); }
       .benefits img { width: calc(11.9138 * var(--m)); height: auto; }
       .offer { flex-direction: column; margin-top: calc(34 * var(--m)); gap: calc(1 * var(--m)); }
-      .cta { width: calc(264 * var(--m)); height: calc(52 * var(--m)); font-size: calc(14.83 * var(--m)); line-height: calc(16.984 * var(--m)); }
+      .cta { width: calc(264 * var(--m)); height: calc(52 * var(--m)); gap: calc(8 * var(--m)); border-radius: calc(12 * var(--m)); font-size: calc(14.83 * var(--m)); line-height: calc(16.984 * var(--m)); }
+      .cta__arrow { width: calc(16 * var(--m)); height: calc(16 * var(--m)); }
       .price { font-size: calc(14.83 * var(--m)); line-height: calc(30.24 * var(--m)); }
       .media { height: calc(271 * var(--m)); }
       .media video, .media::after { top: 0; height: 100%; }
@@ -195,7 +199,7 @@
         </ul>
 
         <div class="offer">
-          <a class="cta" href="https://pay.hub.la/xgfLXCwQiy7C8IW51eW9"><span class="cta__fill" aria-hidden="true"></span>ACESSAR AGORA</a>
+          <a class="cta" href="https://pay.hub.la/xgfLXCwQiy7C8IW51eW9">ACESSAR AGORA<svg class="cta__arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           <p class="price"><span class="only-mobile">Pagamento único de </span>R$47</p>
         </div>
       </div>
